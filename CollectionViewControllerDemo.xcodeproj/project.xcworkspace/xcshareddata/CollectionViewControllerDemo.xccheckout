@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>ABF403A4-5C5D-4F60-A5E5-40656D916F68</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CollectionViewControllerDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>59B0DD3A0DC0B86D2A06DD4B68CBD1C997876614</key>
+		<string>https://github.com/lizelu/CollectionViewControllerDemo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>CollectionViewControllerDemo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>59B0DD3A0DC0B86D2A06DD4B68CBD1C997876614</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lizelu/CollectionViewControllerDemo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>59B0DD3A0DC0B86D2A06DD4B68CBD1C997876614</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>59B0DD3A0DC0B86D2A06DD4B68CBD1C997876614</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>59B0DD3A0DC0B86D2A06DD4B68CBD1C997876614</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CollectionViewControllerDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
