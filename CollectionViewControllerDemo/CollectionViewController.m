@@ -9,8 +9,10 @@
 #import "CollectionViewController.h"
 #import "CollectionViewCell.h"
 
+#define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
 @interface CollectionViewController ()
-
+@property (nonatomic) CGFloat cellWidth;
+@property (nonatomic) CGFloat padding;
 @end
 
 @implementation CollectionViewController
@@ -23,6 +25,10 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
     
     //设置Cell多选
     self.collectionView.allowsMultipleSelection = YES;
+    
+    _padding = 10;
+    
+    _cellWidth = (SCREEN_WIDTH - 4 * _padding) / 3;
     
     //注册Section的Footer和Header
     [self registerHeaderAndFooterView];
@@ -86,6 +92,9 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
     //通过Cell重用标示符来获取Cell
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier: reuseIdentifier
                                                                          forIndexPath: indexPath];
+    NSLog(@"%d, %d, %@", cell.highlighted, cell.selected, indexPath);
+    
+    [self changeSelectStateWithCell:cell];
     
     return cell;
 }
@@ -125,7 +134,9 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
   sizeForItemAtIndexPath: (NSIndexPath *)indexPath{
     
     if (indexPath.section == 0) {
-        return CGSizeMake(50, 50);
+        CGFloat heightOfCell = arc4random() % 100 + 30;
+        
+        return CGSizeMake(heightOfCell, _cellWidth);
     }
     
     return CGSizeMake(60, 60);
@@ -138,9 +149,6 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
                         layout: (UICollectionViewLayout*)collectionViewLayout
         insetForSectionAtIndex: (NSInteger)section{
     
-    if (section == 0) {
-        return UIEdgeInsetsMake(50, 50, 50, 50);
-    }
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
@@ -152,7 +160,7 @@ static NSString * const reuseIdentifier = @"CollectionViewCell";
                    layout: (UICollectionViewLayout*)collectionViewLayout
 minimumLineSpacingForSectionAtIndex: (NSInteger)section{
     if (section == 0) {
-        return 5.0f;
+        return 10;
     }
     return 20.0f;
 }
@@ -164,7 +172,7 @@ minimumLineSpacingForSectionAtIndex: (NSInteger)section{
                    layout: (UICollectionViewLayout*)collectionViewLayout
 minimumInteritemSpacingForSectionAtIndex: (NSInteger)section{
     if (section == 0) {
-        return 5.0f;
+        return 10;
     }
     return 20.0f;
 }
@@ -263,8 +271,8 @@ didUnhighlightItemAtIndexPath: (NSIndexPath *)indexPath{
  * Cell选中调用该方法
  */
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    [self changeSelectStateWithIndexPath:indexPath];
+    CollectionViewCell *currentSelecteCell = (CollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    [self changeSelectStateWithCell:currentSelecteCell];
 }
 
 /**
@@ -272,16 +280,17 @@ didUnhighlightItemAtIndexPath: (NSIndexPath *)indexPath{
  */
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    [self changeSelectStateWithIndexPath:indexPath];
+    //获取当前变化的Cell
+    CollectionViewCell *currentSelecteCell = (CollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    [self changeSelectStateWithCell:currentSelecteCell];
 }
 
 
 /**
  * Cell根据Cell选中状态来改变Cell上Button按钮的状态
  */
-- (void) changeSelectStateWithIndexPath: (NSIndexPath *) indexPath{
-    //获取当前变化的Cell
-    CollectionViewCell *currentSelecteCell = (CollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+- (void) changeSelectStateWithCell: (CollectionViewCell *) currentSelecteCell{
+ 
     
     currentSelecteCell.selectButton.selected = currentSelecteCell.selected;
     
@@ -302,7 +311,7 @@ didUnhighlightItemAtIndexPath: (NSIndexPath *)indexPath{
 - (void)collectionView: (UICollectionView *)collectionView
        willDisplayCell: (UICollectionViewCell *)cell
     forItemAtIndexPath: (NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0){
-    NSLog(@"第%ld个Section上第%ld个Cell将要出现",indexPath.section ,indexPath.row);
+//    NSLog(@"第%ld个Section上第%ld个Cell将要出现",indexPath.section ,indexPath.row);
 }
 
 /**
@@ -311,7 +320,7 @@ didUnhighlightItemAtIndexPath: (NSIndexPath *)indexPath{
 - (void)collectionView: (UICollectionView *)collectionView
   didEndDisplayingCell: (UICollectionViewCell *)cell
     forItemAtIndexPath: (NSIndexPath *)indexPath{
-    NSLog(@"第%ld个Section上第%ld个Cell已经出现",indexPath.section ,indexPath.row);
+//    NSLog(@"第%ld个Section上第%ld个Cell已经出现",indexPath.section ,indexPath.row);
 }
 
 
@@ -323,7 +332,7 @@ willDisplaySupplementaryView: (UICollectionReusableView *)view
         forElementKind: (NSString *)elementKind
            atIndexPath: (NSIndexPath *)indexPath NS_AVAILABLE_IOS(8_0){
     
-    NSLog(@"第%ld个Section上第%ld个扩展View将要出现",indexPath.section ,indexPath.row);
+//    NSLog(@"第%ld个Section上第%ld个扩展View将要出现",indexPath.section ,indexPath.row);
     
 }
 
@@ -335,7 +344,7 @@ didEndDisplayingSupplementaryView: (UICollectionReusableView *)view
       forElementOfKind: (NSString *)elementKind
            atIndexPath: (NSIndexPath *)indexPath{
     
-    NSLog(@"第%ld个Section上第%ld个扩展View已经出现",indexPath.section ,indexPath.row);
+//    NSLog(@"第%ld个Section上第%ld个扩展View已经出现",indexPath.section ,indexPath.row);
     
 }
 
